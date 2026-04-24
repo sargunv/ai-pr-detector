@@ -1,5 +1,5 @@
 name: Detect AI-generated pull requests
-description: Detect AI-generated PRs from commit metadata using only the GitHub API.
+description: Detect and label AI-generated PRs from commit metadata.
 
 inputs:
   label:
