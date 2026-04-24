@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" },
+  "editor.defaultFormatter": "dprint.dprint",
+  "oxc.typeAware": true,
+  "oxc.fixKind": "safe_fix",
+  "oxc.unusedDisableDirectives": "deny"
+}

@@ -1,0 +1,7 @@
+node_modules
+.mise
+.local
+.env.local
+coverage
+*.tsbuildinfo
+workpad.md

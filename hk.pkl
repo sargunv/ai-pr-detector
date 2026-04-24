@@ -1,0 +1,43 @@
+amends "package://github.com/jdx/hk/releases/download/v1.38.0/hk@1.38.0#/Config.pkl"
+
+import "package://github.com/jdx/hk/releases/download/v1.38.0/hk@1.38.0#/Builtins.pkl"
+
+local allSteps = new Mapping<String, Step> {
+  ["dprint"] = Builtins.dprint
+  ["jvl"] {
+    glob = List("**/*.json", "**/*.jsonc")
+    check = "jvl check {{files}}"
+  }
+  ["vp-check"] {
+    glob = List("src/**/*.ts", "test/**/*.ts", "vite.config.ts")
+    check = "pnpm exec vp check --no-fmt"
+    fix = "pnpm exec vp check --no-fmt --fix"
+  }
+  ["bundle"] {
+    glob = List("src/**/*.ts", "dist/**", "package.json", "pnpm-lock.yaml")
+    check = "pnpm exec vite build && git diff --exit-code -- dist && test -z \"$(git ls-files --others --exclude-standard -- dist)\""
+    exclusive = true
+    fix = "pnpm exec vite build"
+  }
+}
+
+hooks {
+  ["pre-commit"] {
+    fix = true
+    stash = "git"
+    steps {
+      ...allSteps
+    }
+  }
+  ["check"] {
+    steps {
+      ...allSteps
+    }
+  }
+  ["fix"] {
+    fix = true
+    steps {
+      ...allSteps
+    }
+  }
+}

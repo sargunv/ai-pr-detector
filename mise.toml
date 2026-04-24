@@ -1,0 +1,41 @@
+[env]
+_.file = ".env.local"
+_.path = "./bin"
+
+[settings]
+experimental = true
+pin = true
+install_before = "3d"
+
+[settings.node]
+corepack = true
+
+[hooks]
+postinstall = ["corepack enable pnpm", "hk install --mise", "pnpm install"]
+
+[tools]
+node = "24.14.1"
+dprint = "0.53.0"
+hk = "1.38.0"
+pkl = "0.31.0"
+"github:sargunv/jvl" = "2026.04.03"
+
+[tasks.build]
+description = "Build the action"
+run = "pnpm exec vite build"
+
+[tasks.test]
+description = "Run tests"
+run = "pnpm exec vitest run"
+
+[tasks.check]
+description = "Run all checks"
+run = "hk check --all"
+
+[tasks.fix]
+description = "Apply autofixes"
+run = "hk fix --all"
+
+[tasks.ci]
+description = "Run CI checks"
+run = "mise run fix && mise run build && mise run test"
