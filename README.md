@@ -17,8 +17,7 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
-  issues: write
+  pull-requests: write
 
 jobs:
   label:
@@ -35,9 +34,9 @@ permissions.
 
 The action also works on `pull_request` events. If `label` is empty, the action
 only sets the `ai-detected` output. If `label` is set, the token needs
-`issues: write`; forked PRs on `pull_request` usually receive a read-only token,
-so labeling is best used with `pull_request_target`, trusted/internal PRs, or a
-separately scoped token.
+`pull-requests: write`; forked PRs on `pull_request` usually receive a read-only
+token, so labeling is best used with `pull_request_target`, trusted/internal
+PRs, or a separately scoped token.
 
 ## Inputs
 
